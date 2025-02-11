@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" type="image/png" href="../assets/img/garena.png">
+</head>
+<body>
+
+    <header class="header">
+        <div class="LOGOS">
+            
+            <img src="assets/img/garena_logo.jpeg" alt="Imagen del logo garena">
+            <img src="assets/img/Freefirelogo.png" alt="Imagen del free fire">
+        
+        </div>
+
+        <button class="hamburguesa estado" id="burguer" onclick="abrir()"><i class="bi bi-three-dots-vertical"></i></button>
+
+        <nav class="nav_bar ocultar" id="nav">
+
+            <button class="Cerrar estado" id="cerrar" onclick="cerrar()"><i class="bi bi-x"></i></button>
+            <a href="" class="datos_nav">HOME</a>
+            <a href="" class="datos_nav">TUTORIAL</a>
+            <a href="" class="datos_nav">PERSONAJES</a>
+            <a href="" class="datos_nav">ARMAS</a>
+            <button class="jugar_nav">JUGAR AHORA</button>
+
+        </nav>
+        
+    </header>
+
+
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        html,body{
+            width: 100%;
+        }
+
+        .header{
+            background-color: #0b0000;
+            display: flex;
+            flex-direction: row;
+            height: 100px;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            box-sizing: border-box;
+
+        }
+
+        .estado{
+            display: none;
+        }
+        .ocultar{
+            display: flex;
+        }
+        .LOGOS{
+            margin-left: 30px;
+        }
+        .LOGOS img:nth-child(1){
+            width: 80px;
+            height: 80px;
+        }
+
+        .LOGOS img:nth-child(2){
+            width: 150px;
+            height: 80px;
+        }
+
+        .nav_bar{
+            display: flex;
+            align-items: center;
+            gap: 42px;
+            font-size: clamp(15px, 2vw, 21px);
+            margin-right: 30px;
+        }
+
+        .nav_bar a{
+            color:white;
+            text-decoration: none;
+            
+        }
+
+        .jugar_nav{
+            width: 185px;
+            height: 40px;
+            background-color: #f80000;
+            border-radius: 35px;
+            color: white;
+            border-color: black;
+            border: 1px solid black;
+        
+        }
+
+       
+
+        @media (max-width:1140px){
+            .LOGOS img:nth-child(1){
+                width: 70px;
+
+            }
+    
+            
+            .nav_bar{
+                margin-right: 10px;
+                gap: 26px;
+                font-size:clamp(14px, 1vw, 21px); ;
+            }
+            .LOGOS{
+                margin-left: 5px;
+            }
+
+            .jugar_nav {
+                width: 164px;
+                height: 43px;
+            }
+        }
+        @media(min-width:1500px){
+            .LOGOS img:nth-child(1) {
+                width: 80px;
+                height: 88px;
+            }
+
+            .LOGOS img:nth-child(2) {
+                width: 204px;
+                height: 98px;
+                
+            }
+        }
+
+        /*MENU DE HAMBURGUESA*/
+        @media (max-width:800px){
+            
+            .nav_bar{
+                display: flex;
+                flex-direction: column;
+                justify-content: stretch;
+                position: absolute;
+                top:0;
+                bottom:0;
+                left: 0;
+                right: 0;
+                background-color: #0b0000;
+                margin: 0;
+                text-align: center;
+                gap: 10px;
+            }
+            .jugar_nav {
+                width: 100%;
+                height: 50px;
+                border-radius: 0;
+          
+            }
+
+            .ocultar{
+                display: none;
+            }
+            .nav_bar a{
+                padding: 15px;
+                background-color: white;
+                color: black;
+                width: 100%;
+                border-bottom: 1px solid white;
+                
+            }
+            .estado{
+                display: block;
+            }
+            .hamburguesa {
+                background-color: transparent;
+                color: white;
+                border: 0;
+                font-size: 35px;
+                margin-right: 20px
+            }
+            .Cerrar{
+                align-self: flex-start;
+                background-color: transparent;
+                color: white;
+                border: 0;
+                font-size: 35px;
+                margin-left:10px;
+                padding: 10px;
+            }
+
+        }
+    </style>
+
+<script>
+
+        const barra = document.getElementById('nav');
+       
+        function abrir(){
+          
+            barra.classList.remove('ocultar');
+        }
+
+        function cerrar(){
+
+            barra.classList.add('ocultar');
+        }
+</script>
+</body>
+</html>
