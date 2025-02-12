@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FREE FIRE</title>
-    <link rel="icon" type="image/png" href="assets/img/Freefirelogo.png">
+    <link rel="icon" type="image/png" href="assets/img/garena.png">
     <link rel="stylesheet" href="css/index.css">
 </head>
-<body>
+<body id="home">
     
     <?php include('template/header.html')?>
 
@@ -15,10 +15,21 @@
 
         <img src="assets/img/Freefirelogo.png" alt="Logo de " class="logo">
         <img src="assets/img/gifs/giphy (1).gif" alt="Gif de free fires">
-        <button class="jugar">JUGAR AHORA</button>
+        <button class="jugar" id ="jugar1" onclick="opened()">JUGAR AHORA</button>
     </div>
 
-    <div class="personajes">
+    <div class="aviso hidden" id="aviso">
+
+        <button class="cerrar_aviso " id="cerrar_aviso" onclick="closened()"><i class="bi bi-x"></i></button>
+        
+        <h1>¿YA TIENES CUENTA?</h1>
+
+        <div class="botones">
+            <button class="registro" onclick="">REGISTRARSE</button>
+            <button class="inicio" onclick="window.location.href='login.php'">INICIAR SESION</button>
+        </div>
+    </div>
+    <div class="personajes" id="personajes">
         
         <img src="assets/img/garena.png" alt="" width="80px" height="80px" class="garena">
 
@@ -98,32 +109,68 @@
         </div>
     </div>
 
-    <div class="armas" style="background-color: white;">
+    <div class="armas" style="background-color: white;" id="armas">
 
 
             <div class="Texto" style="color:black">
-                <h1>PERSONAJES</h1>
-                <p>Desde las profundidas de bermuda y el purgatorio, los mejores de los mejores justo aqui.</p>
+                <h1>ARMAS</h1>
+                <p>Nuestros mejores aliados ante cualquier batalla, !nunca te dejaran votado!</p>
             </div>
 
             <div class="armas_vista">
 
                 <div class="card_gun">
-                    <img src="" alt="">
+                    <img src="assets/img/ametralladoras.png" alt="">
                     <div class="info_spawn">
-                        <h1>MOCO</h1>
-                        <p>La hacker que todo lo ve. ¿Crees que puedes ocultarte?</p>
+                        <h1>AMETRALLADORAS</h1>
                     </div>
+                </div>
 
+                <div class="chiquitas">
+
+                    <div class="cardSmall">
+
+                        <img src="assets/img/pistolas.png" alt="">
+
+                        <div class="info_spawn">
+                            <h1>PISTOLAS</h1>
+                        </div>
+
+                    </div>
+                    <div class="cardSmall">
+
+                        <img src="assets/img/puños.png" alt="">
+                        <div class="info_spawn">
+                            <h1>CUERPO</h1>
+                        </div>
+                    </div>
 
                 </div>
 
 
+                <div class="card_gun">
 
+                    <img src="assets/img/snipers.png" alt=" imagen de francos">
+                    <div class="info_spawn">
+                        <h1>FRANCOTIRADORES</h1>
+                    </div>
+                </div>
             </div>
 
 
     </div>
 
+   <?php include('template/footer.html')?>
+
+    <script>
+
+        const aviso = document.getElementById('aviso');
+            function opened(){
+                aviso.style.display="flex";
+            }
+            function closened(){
+                aviso.style.display="none";
+            }
+    </script>
 </body>
 </html>

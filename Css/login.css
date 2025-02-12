@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.body{ 
+    border: solid 3px yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.conten_form {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.contenido{
+    margin-top: 100px;
+}
+
+.imagen-derecha {
+    width: 70%;
+    display: flex;
+    height: auto;
+    background-image: url(../assets/img/imagelog.png);
+    background-size:cover;
+    margin-left: auto;
+}
+
+.form-info {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.form-infor img {
+    padding-top: 30px;
+    width: 400px;
+    height: 150px;
+}
+
+.form-infor h1 {
+    font-size: 15px;
+}
+
+.input_field label {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.input_field .icon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon input{
+    width: 100%;
+    padding: 5px 10px;
+    outline: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.icon i {
+    margin-left: 7px;
+}
+
+.icon {
+    border: solid 3px black;
+    border-radius: 5px;
+}
+
+p {
+    
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #f96800;
+}
+
+.btn-field {
+    padding: 10px;
+}
+
+.btn-field button {
+    border: solid 3px rgb(255, 255, 255);
+    padding: 5px 50px;
+    background: #f96800;
+}
+
+.btn-field button:hover {
+    border: none;
+    background-color: #ff9142;
+}
+
+.resgister {
+    
+    padding: 10px;
+}
+
+.resgister input {
+    padding: 10px 30px;
+    border-radius: 100px;
+    background-color: rgb(152, 152, 152);
+    color: #fff;
+}
+
+.resgister input:hover {
+    background-color: #cbcbcb;
+    color: #ff9142;
+}
+
+
+
+
+
+
+
+

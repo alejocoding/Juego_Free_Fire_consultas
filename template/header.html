@@ -12,8 +12,10 @@
     <header class="header">
         <div class="LOGOS">
             
-            <img src="assets/img/garena_logo.jpeg" alt="Imagen del logo garena">
-            <img src="assets/img/Freefirelogo.png" alt="Imagen del free fire">
+            <a href="index.php" class="alterar">
+                <img src="assets/img/garena_logo.jpeg" alt="Imagen del logo garena">
+                <img src="assets/img/Freefirelogo.png" alt="Imagen del free fire">
+            </a>
         
         </div>
 
@@ -22,11 +24,10 @@
         <nav class="nav_bar ocultar" id="nav">
 
             <button class="Cerrar estado" id="cerrar" onclick="cerrar()"><i class="bi bi-x"></i></button>
-            <a href="" class="datos_nav">HOME</a>
-            <a href="" class="datos_nav">TUTORIAL</a>
-            <a href="" class="datos_nav">PERSONAJES</a>
-            <a href="" class="datos_nav">ARMAS</a>
-            <button class="jugar_nav">JUGAR AHORA</button>
+            <a href="index.php#home" class="datos_nav">HOME</a>
+            <a href="index.php#personajes" class="datos_nav">PERSONAJES</a>
+            <a href="index.php#armas" class="datos_nav">ARMAS</a>
+            <button class="jugar_nav" id="jugar2" onclick="opened()">JUGAR AHORA</button>
 
         </nav>
         
@@ -43,9 +44,14 @@
 
         html,body{
             width: 100%;
+           scroll-behavior: smooth;
+            
         }
 
         .header{
+            position: fixed; /* Fija el header en la parte superior */
+            top: 0; /* Lo deja pegado arriba */
+            left: 0;
             background-color: #0b0000;
             display: flex;
             flex-direction: row;
@@ -55,6 +61,7 @@
             justify-content: space-between;
             padding: 10px;
             box-sizing: border-box;
+            z-index: 3; 
 
         }
 
@@ -153,9 +160,10 @@
                 background-color: #0b0000;
                 margin: 0;
                 text-align: center;
-                gap: 10px;
+                gap: 0;
             }
             .jugar_nav {
+                padding: 20px;
                 width: 100%;
                 height: 50px;
                 border-radius: 0;
@@ -209,6 +217,15 @@
 
             barra.classList.add('ocultar');
         }
+</script>
+<script>
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "p") { // Si presionas "P", va a la sección de personajes
+            document.querySelector(".personajes").scrollIntoView({ behavior: "smooth" });
+        } else if (event.key === "a") { // Si presionas "A", va a la sección de armas
+            document.querySelector(".armas").scrollIntoView({ behavior: "smooth" });
+        }
+    });
 </script>
 </body>
 </html>
