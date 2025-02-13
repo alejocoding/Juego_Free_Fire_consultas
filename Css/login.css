@@ -2,58 +2,60 @@
     margin: 0;
     padding: 0;
     border: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
-
-.body{ 
-    border: solid 3px yellow;
+body{
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 100vh;
+
 }
 
-.conten_form {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-}
-
-.contenido{
+.contenido_grid{
     margin-top: 100px;
+    display: grid;
+    grid-template:"contenido imagen" 1fr/ 40% 60%;
+    min-height: 676px;
+    height: 87vh;
+    margin-bottom:30px;
 }
 
-.imagen-derecha {
-    width: 70%;
+.seccion{
+    padding-top: 40px;
     display: flex;
-    height: auto;
-    background-image: url(../assets/img/imagelog.png);
-    background-size:cover;
-    margin-left: auto;
+    flex-direction: column;
+    align-items: center;
 }
-
-.form-info {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-
-.form-infor img {
-    padding-top: 30px;
+.free_fire{
     width: 400px;
-    height: 150px;
+    height: 125px;
+    object-fit: cover;
 }
 
-.form-infor h1 {
-    font-size: 15px;
+.formulario{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: auto;
+    gap: 5px;
 }
+
+.seccion .titulo{
+    font-weight: 700;
+    
+}
+
+
+
 
 .input_field label {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     width: 100%;
     text-align: left;
-    margin-left: 30px;
+    margin-left: 5px;
 }
 
 .input_field .icon {
@@ -80,50 +82,68 @@
     border-radius: 5px;
 }
 
-p {
-    
-    padding: 10px;
-}
 
-a {
-    text-decoration: none;
-    color: #f96800;
+
+
+.imagen {
+    background: url('../assets/img/imagelog.png') no-repeat center center/cover;
+}
+.forgot_password{
+    padding-top: 15px;
+    text-align: center;
 }
 
 .btn-field {
+    display: flex;
+    justify-content: center;
     padding: 10px;
+    margin-bottom: 10px;
+    
 }
 
 .btn-field button {
-    border: solid 3px rgb(255, 255, 255);
+    
     padding: 5px 50px;
+    height: 50px;
     background: #f96800;
+    border-radius: 10px;
+    font-weight: 700;
+    border: 3px solid antiquewhite;
 }
 
 .btn-field button:hover {
-    border: none;
+    scale: 1.04;
     background-color: #ff9142;
+    border:  3px solid rgb(255, 255, 255);
+    filter: blur(0.5px);
 }
 
-.resgister {
-    
-    padding: 10px;
-}
-
-.resgister input {
-    padding: 10px 30px;
-    border-radius: 100px;
-    background-color: rgb(152, 152, 152);
-    color: #fff;
-}
-
-.resgister input:hover {
-    background-color: #cbcbcb;
-    color: #ff9142;
+.buton_registro{
+    margin-bottom: 40px;
+    font-size: 14px;
+    border: 0;
+    background-color: rgba(91, 48, 48, 0.23);
+    border-radius: 19px;
+    height: 42px;
+    width: 212px;
+    color: white;
+    font-weight: 700;
+    align-self: center;
+    overflow-y: hidden;
 }
 
 
 
+@media (min-height:785px){
+    *{
+        overflow-y: hidden;
+    }
+   
+    .seccion{
+        margin-top: 5%;
+    }
+
+}
 
 
 

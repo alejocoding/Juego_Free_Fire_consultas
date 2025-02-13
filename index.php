@@ -25,7 +25,7 @@
         <h1>¿YA TIENES CUENTA?</h1>
 
         <div class="botones">
-            <button class="registro" onclick="">REGISTRARSE</button>
+            <button class="registro" onclick="window.location.href='registro.php'">REGISTRARSE</button>
             <button class="inicio" onclick="window.location.href='login.php'">INICIAR SESION</button>
         </div>
     </div>

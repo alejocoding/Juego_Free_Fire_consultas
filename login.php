@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="icon" type="image/png" href="assets/img/garena.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="Css/login.css">
 </head>
@@ -15,15 +15,14 @@
         include('template/header.html'); 
     ?>
 
-    <div class = "contenido">
-        <div class = "conten_form">
-            <div class = "form-info">
+<div class="contenido_grid">
+
+        <div class = "seccion">
+            
+                    <img src="assets\img/Freefirelogo.png" alt="logo" class="free_fire">
+                    <p class="titulo">INGRESA A TU CUENTA DE FREE FIRE</p>
                 
-                <div class = "form-infor">
-                    <img src="assets\img/Freefirelogo.png" alt="logo">
-                    <h1 class = "titu"> INGRESA A TU CUENTA DE FREE FIRE</h1>
-                
-                    <form action="includes/inicio.php" method= "POST" enctype = "multipart/form-data">
+                    <form action="includes/inicio.php" method= "POST" enctype = "multipart/form-data" class="formulario">
 
                         <div class = "input-gruop">
                             <div class = "input_field">
@@ -44,26 +43,22 @@
 
                         </div>
 
-                        <p>Olvidaste tu contraseña?<a href="#">Recuperala</a></p> 
+                        <p class="forgot_password">Olvidaste tu contraseña?<a href="recuperar_contraseña_1.php" style="color: #5e17eb;">Recuperala</a></p> 
                         
                         <div class = "btn-field">
                             <button type="submit" name = "log" id="log" value = "Log" class="btn btn-primary">Sig  in</button>
                         </div>
-
-                        <div class = "resgister">
-                            <a href="Registro.php"><input type="button" value = '¿Nuevo en FREE FIRE?
-Registrate aqui'></a>
-                        </div>
-                        
                     </form>
-                </div>
-            </div>
-            <div class = "imagen-derecha">
+                    <button onclick="window.location.href='registro.php'" class="buton_registro"> ¿Nuevo en FREE FIRE? <p style="color: #f96800">Registrate aqui</p></button>
                 
-            </div>   
+           
+             
         </div>
+
+        <div class="imagen"></div>
          
-    </div>
+</div>
     <?php include('template/footer.html')?>
+    
 </body>
 </html>
