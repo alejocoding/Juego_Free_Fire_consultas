@@ -10,7 +10,7 @@
 </head>
 <body>
     
-<?php include('template/header.html')?>
+<?php include('template/header_2.html')?>
 
     <div class="contenido_grid">
 

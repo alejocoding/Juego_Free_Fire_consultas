@@ -1,0 +1,20 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.fondo{
+    padding-top: 15px;
+    display: grid;
+    grid-template-rows: 10% 90%;
+    background-image: url('../img/lobby.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    min-height: 400px;
+    background-color: black;
+    overflow-x: visible;
+    z-index: 0;
+}

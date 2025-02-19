@@ -1,0 +1,74 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.fondo{
+    padding-top: 15px;
+    position: static;
+    background-image: url('../img/lobby.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    min-height: 400px;
+    background-color: black;
+    overflow-x: visible;
+    z-index: 0;
+}
+
+/* PARTE  DE LA NAV */
+.categorias{
+    display: inline-flex;
+    gap: 19px;
+    width: 100%;
+    justify-content: center;
+    padding: 18px;
+    font-size: 10px;
+}
+.categorias a{
+    text-decoration: none;
+    color: white;
+}
+
+.salida button{
+    background-color: transparent;
+    color: white;
+    border: 0;
+    font-size: 2rem;
+    padding: 15px;
+}
+
+
+/* TARJETAS DEL ARMA  */
+.Mostrar_armas{
+    display: flex ;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+}
+.cart_arma{
+    background-color: rgba(248, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 217px;
+    height: auto;
+    padding: 15px;
+    color: white;
+}
+.cart_arma img{
+    width: 151px;
+    align-self: center;
+    height: 134px;
+    object-fit: contain;
+}

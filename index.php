@@ -18,6 +18,8 @@
         <button class="jugar" id ="jugar1" onclick="opened()">JUGAR AHORA</button>
     </div>
 
+
+        <!-- AQUI ESTA EL AVISO FLOTANTE -->
     <div class="aviso hidden" id="aviso">
 
         <button class="cerrar_aviso " id="cerrar_aviso" onclick="closened()"><i class="bi bi-x"></i></button>

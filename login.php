@@ -1,3 +1,10 @@
+<?php
+require_once('Database/database.php');
+
+$conexion = new database;
+$con = $conexion->conectar();   
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +19,7 @@
 <body>
 
     <?php 
-        include('template/header.html'); 
+        include('template/header_2.html'); 
     ?>
 
 <div class="contenido_grid">
@@ -22,7 +29,7 @@
                     <img src="assets\img/Freefirelogo.png" alt="logo" class="free_fire">
                     <p class="titulo">INGRESA A TU CUENTA DE FREE FIRE</p>
                 
-                    <form action="includes/inicio.php" method= "POST" enctype = "multipart/form-data" class="formulario">
+                    <form action="includes/Sesion_start.php" method= "POST" enctype = "multipart/form-data" class="formulario">
 
                         <div class = "input-gruop">
                             <div class = "input_field">
@@ -46,7 +53,7 @@
                         <p class="forgot_password">Olvidaste tu contraseña?<a href="recuperar_contraseña_1.php" style="color: #5e17eb;">Recuperala</a></p> 
                         
                         <div class = "btn-field">
-                            <button type="submit" name = "log" id="log" value = "Log" class="btn btn-primary">Sig  in</button>
+                            <button type="submit" name = "submit" id="log" value = "Log" class="btn btn-primary" onclick="window.location.href='roles/jugador/index.php'">Sig  in</button>
                         </div>
                     </form>
                     <button onclick="window.location.href='registro.php'" class="buton_registro"> ¿Nuevo en FREE FIRE? <p style="color: #f96800">Registrate aqui</p></button>

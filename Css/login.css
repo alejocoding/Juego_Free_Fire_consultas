@@ -2,10 +2,11 @@
     margin: 0;
     padding: 0;
     border: 0;
-    overflow-x: hidden;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 body{
+ 
     position: relative;
     display: flex;
     flex-direction: column;
@@ -20,6 +21,7 @@ body{
     min-height: 676px;
     height: 87vh;
     margin-bottom:30px;
+ 
 }
 
 .seccion{
@@ -135,14 +137,73 @@ body{
 
 
 @media (min-height:785px){
-    *{
+    .contenido_grid{
         overflow-y: hidden;
     }
    
     .seccion{
         margin-top: 5%;
     }
+}
 
+@media (max-width:930px){
+    .free_fire {
+        width: 291px;
+        height: 110px;
+    }
+    .seccion .titulo {
+        font-weight: 700;
+        font-size: 14px;
+    }
+    .input_field label {
+        width: 81%;
+    }
+    .input-gruop{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .forgot_password {
+        padding-top: 10px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .btn-field button {
+        padding: 5px 50px;
+        height: 46px;
+    }
+    .buton_registro {
+        margin-bottom: 12px;
+        font-size: 13px;
+        border: 0;
+        background-color: rgba(91, 48, 48, 0.23);
+        border-radius: 19px;
+        height: 42px;
+        width: 175px;
+        }
+}
+
+@media (max-width:800px){
+    *{
+        overflow-x:visible;
+    }
+}
+@media (max-width:700px){
+    .seccion {
+        padding-top: 15px;
+    }
+    .contenido_grid {
+        margin-top: 100px;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .imagen{
+        display: none
+    }
+        
 }
 
 

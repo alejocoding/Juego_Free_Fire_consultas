@@ -1,3 +1,75 @@
+<?php
+require_once('Database/database.php');
+
+$conexion = new database;
+$con = $conexion->conectar();
+
+
+if(isset($_POST['submit'])){
+
+    $usuario =$_POST['username'];
+    $correo =$_POST['correo'];
+    $contrasena = $_POST['contrasena'];
+    $val_contra = $_POST['con_contrasena'];
+   
+    if(empty($usuario)||empty( $correo)|| empty($contrasena) || empty($val_contra)){
+
+        echo "<script>alert('DATOS VACIOS')</script>";
+        echo "<script>window.location.href='registro.php'</script>";
+    }else{
+        $encripted = password_hash($contrasena, PASSWORD_BCRYPT, array("cost" => 12));
+
+        if(password_verify($val_contra,$encripted)){
+
+            $sql = $con->prepare("SELECT * FROM usuario WHERE username =:usuario");
+            $sql->bindParam(":usuario",$usuario, PDO::PARAM_STR);
+            $sql->execute();
+       
+    
+            if($sql->rowCount() > 0){
+    
+                echo "<script>alert('Usuario ya registrado ')</script>";
+                
+            }else{
+                
+
+                $sql2 = $con->prepare("INSERT INTO usuario (username,password,correo,id_rol,id_estado) VALUES (:user,:pass,:mail,2,2)");
+                $sql2->bindParam(":user",$usuario,PDO::PARAM_STR);
+                $sql2->bindParam(":pass",$encripted,PDO::PARAM_STR);
+                $sql2->bindParam(":mail",$correo,PDO::PARAM_STR);
+
+                $sql2->execute();
+                
+               
+
+                if($sql2){
+                    echo "<script>alert('Registrado correctamente')</script>";
+                    echo "<script>window.location.href='login.php'</script>";
+                }else{
+                    echo "<script>alert('Error de registro, intentalo de nuevo')</script>";
+                }
+
+                
+            }   
+
+        }else{
+            echo "<script>alert('CONTRASEÑAS DESIGUALES')</script>";
+       
+        }
+
+        // VALIDACION DE USUARIO EXISTENTE
+       
+
+    }
+
+
+
+    
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +78,11 @@
     <title>Registro</title>
     <link rel="icon" type="image/png" href="assets/img/garena.png">
     <link rel="stylesheet" href="css/registro.css">
+    
 </head>
 <body>
 
-<?php include('template/header.html')?>
+<?php include('template/header_2.html')?>
 
 <div class="contenido_grid">
 
@@ -17,22 +90,22 @@
         <img src="assets/img/Freefirelogo.png" alt="IMAGEN DE FREE FIRE" class="free_fire">
         <p class="titulo">CREA TU CUENTA FREE FIRE</p>
 
-        <form action="" method="post" class="formulario">
+        <form action="" method="POST" class="formulario">
 
         <label for="username" >username:*</label>
-        <input type="text" id="username" class="input" required>
+        <input type="text" id="username" name ="username" class="input" required>
         <span></span>
 
         <label for="correo">Correo:*</label>
-        <input type="text" id="correo" class="input" required>
+        <input type="text" id="correo" name ="correo" class="input" required>
         <span></span>
 
         <label for="contraseña">Contraseña:*</label>
-        <input type="password" id="contraseña" class="input" required>
+        <input type="password" id="contrasena" name ="contrasena" class="input" required>
         <span></span>
 
         <label for="con_contraseña">Confirmar contraseña:*</label>
-        <input type="password" id="con_contraseña" class="input" required>
+        <input type="password" id="con_contrasena" name ="con_contrasena" class="input" required>
         <span></span>
 
         <input type="submit" name="submit" value="Crear Cuenta" class="input_submit">
