@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once("../../includes/ValidarSesion.php");
 require_once('../../Database/database.php');
 $conexion = new database;
 $con = $conexion->conectar();
@@ -11,7 +11,28 @@ $sql->execute();
 
 $data = $sql->fetch(PDO::FETCH_ASSOC);
 
-$sql2 =$con->prepare("SELECT * FROM mapas");
+if($data['vida']<100){
+    $cambio = $con->prepare("UPDATE usuario set vida = 100 WHERE id_usuario =:usuario");
+    $cambio->bindParam(":usuario", $_SESSION['id_user'],PDO::PARAM_INT);
+    $cambio->execute();
+}
+
+if($data['puntos']>=500){
+    $nivel = $con->prepare("UPDATE usuario set nivel =2 WHERE id_usuario =:usuario");
+    $nivel->bindParam(":usuario", $_SESSION['id_user'],PDO::PARAM_INT);
+    $nivel->execute();
+
+   
+
+}else{
+    $nivel = $con->prepare("UPDATE usuario set nivel =1 WHERE id_usuario =:usuario");
+    $nivel->bindParam(":usuario", $_SESSION['id_user'],PDO::PARAM_INT);
+    $nivel->execute();
+}
+
+
+$sql2 =$con->prepare("SELECT * FROM mapas where nivel_requerido =:nivel");
+$sql2->bindParam(":nivel",$data['nivel'],PDO::PARAM_INT);
 $sql2->execute();
 
 $mapa = $sql2->fetchAll(PDO::FETCH_ASSOC);
@@ -19,15 +40,20 @@ $mapa = $sql2->fetchAll(PDO::FETCH_ASSOC);
 // COLOCO DATOS DEL PERSONAJE
 $_SESSION['id_personaje'] = $data['id_personaje'];
 $_SESSION['nivel_usuario'] = $data['nivel'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="30">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lobby</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/lobby.css">
+    <link rel="icon" href="img/free_fire">
   
 </head>
 <body>
@@ -52,6 +78,7 @@ $_SESSION['nivel_usuario'] = $data['nivel'];
 
         <button type="button" class="personajes" onclick="window.location.href='personajes.php'"> <img src="img/personajes.png" alt=""> <p>Personajes</p></button>
         <button type="button" class="armas" onclick="window.location.href='Armas.php'"><img src="img/pistolas.png" alt=""> <p>Armas</p></button>
+        <button type="button" class="partidas" onclick="window.location.href='registro_partidas.php'"><img src="img/partidas.png" alt="" style="background-color: #000100;"> <p>Partidas</p></button>
     </section>
 
 

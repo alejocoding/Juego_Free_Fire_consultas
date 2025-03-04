@@ -1,3 +1,34 @@
+<?php
+session_start();
+require_once('includes/validar_contra.php');
+require_once('Database/database.php');
+
+$conexion = new database;
+$con = $conexion->conectar();   
+
+
+if(isset($_POST['enviar'])){
+
+    $codigo = $_POST['codigo'];
+    
+
+    if(empty($codigo)){
+        echo "<script>alert('Archivos vacios')</script>";
+        exit();
+    }
+  
+
+    if($codigo == $_SESSION['code']){
+    
+        header("location: contraseña_restablecer_3.php");
+    }else{  
+        echo "<script>alert('Codigo incorrecto')</script>";
+        
+    }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +58,7 @@
                 <span></span>
       
                 <div class="botones">
-                    <button type="submit" class="continuar" onclick="window.location.href='contraseña_restablecer_3.php'">Continuar</button>
+                    <button type="submit" name ="enviar" class="continuar">Continuar</button>
                 </div>
                 
                 
@@ -42,7 +73,13 @@
 
     </div>
 
-    <?php include('template/footer.html')?>
+    <div class="footer">
+
+        <img src="assets/img/garena.png" alt="">
+        <p>DERECHOS DE AUTOR, LIGADO A TERMINOS Y CONDICIONES ©</p>
+        <img src="assets/img/Freefirelogo.png" alt="">
+
+    </div>
 
     
 </body>

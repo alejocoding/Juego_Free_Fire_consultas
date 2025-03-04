@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.sidebar {
+    width: 150px;
+    background-color:#05042C;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+}
+.sidebar h2 {
+    text-align: center;
+    font-size: 16;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin: 20px 0;
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+i{
+    padding-right:10px; ;
+}
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.sidebar li:hover{
+    background-color:#12103f;
+}
+
+/* TABLA COSAS */
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 12px;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+thead {
+    background: #f0f0f0;
+    color: #333;
+}
+
+thead td {
+    padding: 8px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+tbody td {
+    padding: 6px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+.tabla{
+    height: 500px;
+    overflow-y: scroll;
+}
+.barra_busqueda input{
+    width: 250px;
+    padding: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}

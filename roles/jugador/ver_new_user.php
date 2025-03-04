@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once("../../includes/ValidarSesion.php");
 require_once('../../Database/database.php');
 $conexion = new database;
 $con = $conexion->conectar();

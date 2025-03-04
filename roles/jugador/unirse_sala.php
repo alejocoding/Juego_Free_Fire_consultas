@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once("../../includes/ValidarSesion.php");
 require_once('../../Database/database.php');
 $conexion = new database;
 $con = $conexion->conectar();
@@ -21,7 +21,7 @@ if(isset($_POST['id_sala'])){
 
         $actualizar = $con->prepare("INSERT INTO usuario_sala (id_usuario, id_sala) 
             VALUES (:user, :sala)
-            ON DUPLICATE KEY UPDATE  id_sala = VALUES(id_sala), fecha_ingreso = NOW()");
+            ON DUPLICATE KEY UPDATE  id_sala = VALUES(id_sala)");
         $actualizar->bindParam(":user", $_SESSION['id_user'], PDO::PARAM_INT);
         $actualizar->bindParam(":sala", $_POST['id_sala'], PDO::PARAM_INT);
         $actualizar->execute(); 

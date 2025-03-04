@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once("../../includes/ValidarSesion.php");
 require_once('../../Database/database.php');
 $conexion = new database;
 $con = $conexion->conectar();
@@ -55,25 +55,44 @@ $armas = $sql->fetchAll(PDO::FETCH_ASSOC);
 
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script>
-$(document).ready(function () {
-    $(".data").click(function (e) {
-        e.preventDefault(); // Evita el comportamiento por defecto de los enlaces
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".data").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault(); 
 
-        let id_categoria = $(this).data("id");
+            let idCategoria = this.dataset.id; // Obtiene la categoría
 
-        $.ajax({
-            url: "AJAX/ajax_obtener_armas.php", // Archivo que obtiene las armas según la categoría
-            type: "GET",
-            data: { id_categoria: id_categoria },
-            success: function (data) {
-                $("#armas").html(data); // Reemplaza el contenido del div con las armas nuevas
-            },
-            error: function () {
-                console.error("Error al obtener las armas.");
-            }
+            fetch("AJAX/ajax_obtener_armas.php?id_categoria=" + idCategoria, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json()) // Convertimos la respuesta a JSON
+            .then(data => {
+                let armasHTML = "";
+                
+                data.forEach(arma => {
+                    armasHTML += `
+                        <div class="cart_arma">
+                            ${arma.nombre}:
+                            <img src="img/${arma.imagen}" alt="imagen del arma" class="arma_cart">
+                            <div class="info_arma">
+                                Cantidad de usos: ${arma.intentos}
+                            </div>
+                            ${arma.nivel_requerido > arma.nivel_usuario 
+                                ? '<div class="bloqueado"><i class="bi bi-lock-fill"></i></div>' 
+                                : ''}
+                        </div>
+                    `;
+                });
+
+                document.getElementById("armas").innerHTML = armasHTML;
+            })
+            .catch(error => console.error("Error al obtener las armas:", error));
         });
     });
 });

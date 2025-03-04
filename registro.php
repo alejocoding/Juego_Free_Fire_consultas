@@ -16,6 +16,21 @@ if(isset($_POST['submit'])){
 
         echo "<script>alert('DATOS VACIOS')</script>";
         echo "<script>window.location.href='registro.php'</script>";
+
+    }else if(strlen($usuario) > 11 || !preg_match('/^[a-zA-Z0-9]+$/', $usuario)){
+        echo "<script>alert('El Username debe tener menos de 10 caracteres, Solo numeros y letras')</script>";
+        echo "<script>window.location.href='registro.php'</script>";
+
+    }else if(!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@gmail\.com$/', $correo)){
+
+        echo "<script>alert('El correo debe ser una dirección válida de Gmail (@gmail.com).');</script>";
+        echo "<script>window.location.href='registro.php';</script>";
+
+    }else if(!preg_match('/^[a-zA-Z0-9]+$/', $contrasena) || strlen($contrasena) <5) {
+
+        echo "<script>alert('La contraseña debe tener como minimo 5 caracteres, solo puede contener letras y números .');</script>";
+        echo "<script>window.location.href='registro.php'</script>";
+
     }else{
         $encripted = password_hash($contrasena, PASSWORD_BCRYPT, array("cost" => 12));
 
@@ -32,23 +47,28 @@ if(isset($_POST['submit'])){
                 
             }else{
                 
-
-                $sql2 = $con->prepare("INSERT INTO usuario (username,password,correo,id_rol,id_estado) VALUES (:user,:pass,:mail,2,2)");
-                $sql2->bindParam(":user",$usuario,PDO::PARAM_STR);
-                $sql2->bindParam(":pass",$encripted,PDO::PARAM_STR);
-                $sql2->bindParam(":mail",$correo,PDO::PARAM_STR);
-
-                $sql2->execute();
-                
-               
-
-                if($sql2){
-                    echo "<script>alert('Registrado correctamente')</script>";
-                    echo "<script>window.location.href='login.php'</script>";
-                }else{
-                    echo "<script>alert('Error de registro, intentalo de nuevo')</script>";
+                try{
+                    $sql2 = $con->prepare("INSERT INTO usuario (username,password,correo,id_rol,id_estado) VALUES (:user,:pass,:mail,2,2)");
+                    $sql2->bindParam(":user",$usuario,PDO::PARAM_STR);
+                    $sql2->bindParam(":pass",$encripted,PDO::PARAM_STR);
+                    $sql2->bindParam(":mail",$correo,PDO::PARAM_STR);
+    
+                    $sql2->execute();
+                    
+                   
+    
+                    if($sql2){
+                        echo "<script>alert('Registrado correctamente')</script>";
+                        echo "<script>window.location.href='login.php'</script>";
+                    }else{
+                        echo "<script>alert('Error de registro, intentalo de nuevo')</script>";
+                    }
+    
+                }catch(PDOException $e){
+                    echo "<script>alert('Correo duplicado')</script>";
+                   
                 }
-
+               
                 
             }   
 

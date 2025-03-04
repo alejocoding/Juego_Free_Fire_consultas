@@ -57,7 +57,7 @@ body{
     flex-direction: column;
     gap: 15px;
     position: absolute;
-    top: 40%;
+    top: 35%;
     left: 0;
 }
 .opciones img{
@@ -355,7 +355,7 @@ body{
     /* BOTON DE OPCIONES */
 
     .opciones{
-        top: 36%;
+        top: 34%;
     }
     .opciones button {
         height: 38px;

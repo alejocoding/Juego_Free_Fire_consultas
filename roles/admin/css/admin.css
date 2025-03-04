@@ -1,26 +1,149 @@
-* {
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    display: flex;
 }
-
-
-/* Contenedor para el video */
-.video-container {
- 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
+.sidebar {
+    width: 150px;
+    background-color:#05042C;
+    color: white;
     height: 100vh;
-    overflow: hidden;
-    z-index: -1; /* Poner el video detrás del contenido */
+    padding: 20px;
+}
+.sidebar h2 {
+    text-align: center;
+    font-size: 16;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar ul li {
+    margin: 20px 0;
+}
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+i{
+    padding-right:10px; ;
+}
+.content {
+    flex: 1;
+    padding: 20px;
 }
 
-/* Ajustar el video */
-.video-container video {
+.sidebar li:hover{
+    background-color:#12103f;
+}
+
+/* Contenedor de la tabla */
+/* Contenedor responsivo */
+.tabla {
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Asegura que cubra toda la pantalla */
-    padding: 0;
+    max-width: 1000px;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+/* Estilos generales de la tabla */
+table {
+    width: 100%;
+    table-layout: fixed;
+    font-size: 12px;
+    border-collapse: collapse;
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+thead {
+    background: #f0f0f0;
+    color: #333;
+}
+
+thead td {
+    padding: 8px;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+tbody td {
+    padding: 6px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+/* Ajuste de ancho de columnas */
+thead td:nth-child(1), tbody td:nth-child(1) { width: 5%; }  /* ID */
+thead td:nth-child(2), tbody td:nth-child(2) { width: 15%; } /* Username */
+thead td:nth-child(3), tbody td:nth-child(3) { width: 20%; } /* Correo */
+thead td:nth-child(4), tbody td:nth-child(4),
+thead td:nth-child(5), tbody td:nth-child(5),
+thead td:nth-child(6), tbody td:nth-child(6) { width: 10%; } /* Vida, Nivel, Puntos */
+thead td:nth-child(7), tbody td:nth-child(7),
+thead td:nth-child(8), tbody td:nth-child(8),
+thead td:nth-child(9), tbody td:nth-child(9) { width: 15%; } /* Rol, Personaje, Estado */
+
+/* Estilos para inputs dentro de la tabla */
+input[type="text"] {
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 4px;
+    text-align: center;
+    font-size: 11px;
+    background: #f9f9f9;
+}
+
+/* Inputs más pequeños para columnas cortas */
+.short {
+    width: 50px;
+}
+
+/* Estilos para selects */
+select {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    font-size: 11px;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+/* Mejora la búsqueda */
+.barra_busqueda {
+    display: flex;
+    justify-content: start;
+    margin: 10px 0;
+}
+
+.barra_busqueda input {
+    width: 250px;
+    padding: 6px;
+    border: 1px solid #ccc;
+}
+
+/* 🟢 Responsividad: Ajustes en pantallas menores a 1000px */
+@media (max-width: 1000px) {
+    .tabla {
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 10px;
+    }
+
+    thead td, tbody td {
+        padding: 5px;
+    }
+
+    input[type="text"], select {
+        font-size: 10px;
+        padding: 3px;
+    }
 }

@@ -3,6 +3,14 @@ require_once('Database/database.php');
 
 $conexion = new database;
 $con = $conexion->conectar();   
+
+
+// PONGO ESTO COMO UNSET, COMO MEDIDA DE SEGURIDAD
+
+unset($_SESSION['user']);
+unset($_SESSION['code']);
+
+
 ?>
 
 <!DOCTYPE html>

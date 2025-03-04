@@ -1,3 +1,48 @@
+<?php
+session_start();
+require_once('includes/validar_contra.php');
+require_once('Database/database.php');
+
+$conexion = new database;
+$con = $conexion->conectar();   
+
+if(isset($_POST['enviar'])){
+
+        $contrasena = $_POST['new_contraseña'];
+        $contrasena_Verify = $_POST['confirmar_con'];
+        echo  $contrasena ."pureba". $contrasena_Verify;
+
+        if (!preg_match('/^[a-zA-Z0-9]+$/', $contrasena)) {
+
+            echo "<script>alert('La contraseña solo puede contener letras y números.');</script>";
+
+        }else if(empty($contrasena) || empty($contrasena_Verify)){
+
+            echo "<script>alert('DATOS VACIOS')</script>";
+         
+        }else{
+            
+            $encripted = password_hash($contrasena, PASSWORD_BCRYPT, array("cost" => 12));
+
+            if(password_verify($contrasena_Verify, $encripted)){
+
+                $sql = $con->prepare("UPDATE usuario SET password = :contrasena WHERE id_usuario = :user");
+                $sql->bindParam(":contrasena", $encripted,PDO::FETCH_ASSOC);
+                $sql->bindParam(":user",$_SESSION['user']);
+
+                $sql->execute();
+
+
+                header("location: includes/destruir_contra.php");
+
+            }else{
+                echo "<script>alert('CONTRASEÑAS DESIGUALES')</script>";
+            }
+        }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +76,7 @@
                 <span></span>
       
                 <div class="botones">
-                    <button type="submit" class="continuar" onclick="window.location.href='login.php'">Cambiar</button>
+                    <button type="submit" class="continuar" name ="enviar">Cambiar</button>
                 </div>
                 
                 

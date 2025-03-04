@@ -23,6 +23,7 @@
 /* BOTON DE SALIDA */
 
 .salida button{
+    grid-area: salida;
     padding: 20px;
     font-size: 5rem;
     background-color: transparent;
@@ -32,13 +33,12 @@
 /* CONTAINER DE TODAS LAS SALAS */
 
 .mostrar_salas{
-    display: grid;
-    width: 40%;
-    height: 77%;
+    display: flex;
+    width: auto;
+    height: auto;
     justify-content: center;
-    grid-template-columns: 1fr 1fr;
-    gap: 15%;
-    /* align-self: center; */
+    gap: 2%;
+    align-self: center;
     justify-self: center;
 }
 
@@ -48,16 +48,19 @@
     position: relative;
     height: 270px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.8);
-    width: 351px;
+    width: 278px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-radius: 35px;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
 }
 
 .imagen img{
     width: 150px;
+    border-radius: 15px;
     object-fit: contain;
 }
 
@@ -84,4 +87,28 @@
     border-radius: 20px;
     border: none;
     color: white;
+}
+
+/* RESPONSIVE PARA CELULAR PARADO */
+
+@media (max-width:836px){
+    .fondo{
+        grid-template-areas:
+        "salida"
+        "contenido";
+
+        height: fit-content;
+        min-height: 100vh;
+    }
+
+
+    .mostrar_salas{
+        flex-direction: column;
+    }
+
+    .sala{
+        height: 251px;
+        width: 248px;
+        margin-bottom: 15px;
+    }
 }
