@@ -1,0 +1,114 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.fondo{
+    padding-top: 15px;
+    display: grid;
+    grid-template-rows: 10% 90%;
+    background-image: url('../img/lobby.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    min-height: 400px;
+    background-color: black;
+    overflow-x: visible;
+    z-index: 0;
+}
+
+
+/* BOTON DE SALIDA */
+
+.salida button{
+    grid-area: salida;
+    padding: 20px;
+    font-size: 5rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+/* CONTAINER DE TODAS LAS SALAS */
+
+.mostrar_salas{
+    display: flex;
+    width: auto;
+    height: auto;
+    justify-content: center;
+    gap: 2%;
+    align-self: center;
+    justify-self: center;
+}
+
+/* SALA INDIVIDUAL */
+
+.sala{
+    position: relative;
+    height: 270px;
+    text-align: center;
+    width: 278px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+}
+
+.imagen img{
+    width: 150px;
+    border-radius: 15px;
+    object-fit: contain;
+}
+
+/* INFORMACION DE LAS SALAS */
+.data{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.data .unirse {
+    background-color: rgba(208, 169, 51, 0.86);
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+}
+
+.data .llena {
+    background-color:  rgba(248, 0, 0, 0.5);
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+}
+
+/* RESPONSIVE PARA CELULAR PARADO */
+
+@media (max-width:836px){
+    .fondo{
+        grid-template-areas:
+        "salida"
+        "contenido";
+
+        height: fit-content;
+        min-height: 100vh;
+    }
+
+
+    .mostrar_salas{
+        flex-direction: column;
+    }
+
+    .sala{
+        height: 251px;
+        width: 248px;
+        margin-bottom: 15px;
+    }
+}
