@@ -10,6 +10,7 @@ if(!$_SESSION['id_user']){
 
     $_SESSION = array();
     session_destroy();
+    session_unset();
     session_write_close();
 
     echo "<script>

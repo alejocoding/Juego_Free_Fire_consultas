@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // PROBABILIDAD DE HEADSHOT
         $probabilidad = rand(1, 100);
-        if ($probabilidad <= 8) { // 8% de probabilidad
+        if ($probabilidad <= 9) { // 9% de probabilidad
             $daño = 75;
             $mensaje_extra = "¡Golpe en la cabeza!";
         } else {

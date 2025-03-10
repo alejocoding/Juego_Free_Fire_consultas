@@ -23,39 +23,49 @@
 
                         // EN CASO DE ERROR BORRAR TODA ESTA SECCION
 
-                        // if($consulta['id_estado'] == 1){
+                        if($consulta['id_estado'] == 1){
 
-                        //     $bloqueo_dias = $con->prepare("SELECT DATEDIFF(NOW(), fecha_entrada) AS dias_diferencia 
-                        //     FROM registro_ingreso 
-                        //     WHERE id_usuario = :id_user 
-                        //     ORDER BY id_registro DESC 
-                        //     LIMIT 1");
+                             $bloqueo_dias = $con->prepare("SELECT DATEDIFF(NOW(), fecha_entrada) AS dias_diferencia 
+                             FROM registro_ingreso 
+                             WHERE id_usuario = :id_user 
+                             ORDER BY id_registro DESC 
+                             LIMIT 1");
         
-                        //     $bloqueo_dias->bindParam(":id_user", $consulta['id_usuario'], PDO::PARAM_INT);
-                        //     $bloqueo_dias->execute();
-                        //     $datos = $bloqueo_dias->fetch(PDO::FETCH_ASSOC);
+                             $bloqueo_dias->bindParam(":id_user", $consulta['id_usuario'], PDO::PARAM_INT);
+                             $bloqueo_dias->execute();
+                             $datos = $bloqueo_dias->fetch(PDO::FETCH_ASSOC);
         
-                        //     $diferenciaDias = $datos ? $datos['dias_diferencia'] : 0;
+                             $diferenciaDias = $datos ? $datos['dias_diferencia'] : 0;
                             
                             
                             
                         
-                        //     if ($diferenciaDias > 9) {
+                             if ($diferenciaDias > 9) {
         
-                        //         $desactivar = $con->prepare("UPDATE usuario SET id_estado = 2 WHERE id_usuario = :user_id");
-                        //         $desactivar->bindParam(":user_id", $consulta['id_usuario'], PDO::PARAM_INT);
-                        //         $desactivar->execute();
-                            
-                        //         $aviso_admin = $con->prepare("INSERT INTO solicitud_ingreso (id_usuario) VALUES (:user_id)");
-                        //         $aviso_admin->bindParam(":user_id", $consulta['id_usuario'],PDO::PARAM_INT);
-                        //         $aviso_admin->execute();
-        
-                        //         echo "<script>alert('Error, Usuario inactivo por inactividad de más de 10 días. Se envio una alerta para restablecer Usuario.'); 
-                        //             window.location.href='../login.php';</script>";
-                        //         exit();
-                        //     }
+                                 $desactivar = $con->prepare("UPDATE usuario SET id_estado = 2 WHERE id_usuario = :user_id");
+                                 $desactivar->bindParam(":user_id", $consulta['id_usuario'], PDO::PARAM_INT);
+                                 $desactivar->execute();
 
-                        // }
+                                 $ultima_id = $con->prepare("SELECT MAX(id_registro) FROM registro_ingreso WHERE id_usuario = :user_id");
+                                 $ultima_id->bindParam(":user_id", $consulta['id_usuario'], PDO::PARAM_INT);
+                                 $ultima_id->execute();
+
+                                 $resultadoss = $ultima_id->fetchColumn();
+
+                                 $cambiar_fecha =$con->prepare("UPDATE registro_ingreso SET fecha_entrada = NOW() WHERE id_registro = :resultado");
+                                 $cambiar_fecha->bindParam(":resultado", $resultadoss, PDO::PARAM_INT);
+                                 $cambiar_fecha->execute();
+                            
+                                 $aviso_admin = $con->prepare("INSERT INTO solicitud_ingreso (id_usuario) VALUES (:user_id)");
+                                 $aviso_admin->bindParam(":user_id", $consulta['id_usuario'],PDO::PARAM_INT);
+                                 $aviso_admin->execute();
+        
+                                 echo "<script>alert('Error, Usuario inactivo por inactividad de más de 10 días. Se envio una alerta para restablecer Usuario.'); 
+                                     window.location.href='../login.php';</script>";
+                                 exit();
+                             }
+
+                         }
 
                     
 
@@ -165,4 +175,5 @@
 
     
     }
+
     // AQUI TERMINA EL POSTSUBMIT

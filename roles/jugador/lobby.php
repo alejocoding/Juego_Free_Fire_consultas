@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once("../../includes/ValidarSesion.php");
+
 require_once('../../Database/database.php');
 $conexion = new database;
 $con = $conexion->conectar();
@@ -48,14 +49,15 @@ $_SESSION['nivel_usuario'] = $data['nivel'];
 <head>
 
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="30">
+    <meta http-equiv="refresh" content="12">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>lobby</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/lobby.css">
-    <link rel="icon" href="img/free_fire">
+    <link rel="icon"  type="image/png" href="img/garena.png">
+   
   
-</head>
+</head> 
 <body>
 
 <main class="lobby">
@@ -119,6 +121,8 @@ $_SESSION['nivel_usuario'] = $data['nivel'];
 
 
 </main>
+
+<script> </script>
     
 </body>
 </html>

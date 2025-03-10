@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once("../../includes/ValidarSesion.php");
 require_once("../../Database/database.php");
 $conexion = new database;
 $con = $conexion->conectar();
@@ -32,7 +33,6 @@ $registro = $registro_partidas->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="index.php"><i class="bi bi-house-door"></i>inicio</a></li>
             <li><a href="jugadores.php"><i class="bi bi-people"></i>Jugadores</a></li>
             <li><a href="registro_partidas.php"><i class="bi bi-file-text"></i>Registro partidas</a></li>
-            <li><a href="#reportes"><i class="bi bi-gear"></i>Modificar Usuarios</a></li>
             <li><a href="../../includes/Sesion_destroy.php"><i class="bi bi-box-arrow-left"></i>Cerrar Sesion</a></li>
         </ul>
     </div>
@@ -40,11 +40,7 @@ $registro = $registro_partidas->fetchAll(PDO::FETCH_ASSOC);
     <div class="content">
         <h1>Seccion de registro partidas</h1>
         
-        <div class="barra_busqueda">
-
-        <input type="text" placeholder="Buscar Usuario por username">
-
-        </div>
+            
 
         <div class="tabla">
 

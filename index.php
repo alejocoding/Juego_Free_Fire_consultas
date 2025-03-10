@@ -11,6 +11,7 @@
 </head>
 <body id="home">
     
+    
     <?php include('template/header.html')?>
 
     <div class="gif">

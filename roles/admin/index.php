@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once("../../includes/ValidarSesion.php");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +21,6 @@
             <li><a href="index.php"><i class="bi bi-house-door"></i>inicio</a></li>
             <li><a href="jugadores.php"><i class="bi bi-people"></i>Jugadores</a></li>
             <li><a href="registro_partidas.php"><i class="bi bi-file-text"></i>Registro partidas</a></li>
-            <li><a href="#reportes"><i class="bi bi-gear"></i>Modificar Usuarios</a></li>
             <li><a href="../../includes/Sesion_destroy.php"><i class="bi bi-box-arrow-left"></i>Cerrar Sesion</a></li>
         </ul>
     </div>
@@ -25,6 +28,7 @@
     <div class="content">
         <h1>Bienvenido al Panel de Administrador</h1>
         <p>Selecciona una opción en la barra lateral para comenzar.</p>
+        <img src="img/home.png" alt="">
     </div>
 
 </body>

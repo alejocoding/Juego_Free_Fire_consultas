@@ -4,7 +4,7 @@ $conexion = new database;
 $con = $conexion->conectar();
 
 // Seleccionar todas las salas activas
-$sql = $con->prepare("SELECT id_sala FROM salas WHERE id_estado != 3 ");
+$sql = $con->prepare("SELECT id_sala FROM salas");
 $sql->execute();
 $salas = $sql->fetchAll(PDO::FETCH_ASSOC);
 

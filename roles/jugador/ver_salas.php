@@ -12,6 +12,9 @@ if(isset($_SESSION['id_user'])){
     $quitar_sala->execute();
   
 }
+$cambio = $con->prepare("UPDATE usuario set vida = 100 WHERE id_usuario =:usuario");
+$cambio->bindParam(":usuario", $_SESSION['id_user'],PDO::PARAM_INT);
+$cambio->execute();
 ?>
 
 <!DOCTYPE html>

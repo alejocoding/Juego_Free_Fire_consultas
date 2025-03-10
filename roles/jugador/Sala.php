@@ -42,6 +42,7 @@ $mapa= $mapa->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SALA</title>
     <link rel="stylesheet" href="css/Sala_iniciar.css">
+    <link rel="icon" type="image/png" href="img/garena.png">
 </head>
 <body>
 
@@ -96,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(response => response.json()) 
             .then(data => {
-                console.log("Jugadores en la sala:", data);
+                
                 let usersDiv = document.getElementById("users");
                 usersDiv.innerHTML = ""; // Limpiar el div antes de mostrar los datos
                 let divHTML = "USUARIOS EN SALA DE ESPERA:"; 
@@ -138,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     actualizarJugadores(); // Llamar la función al cargar la página
-    setInterval(actualizarJugadores, 1000); // Repetir cada 1 segundos
+    setInterval(actualizarJugadores, 2000); // Repetir cada 1 segundos
 });
 
 </script>

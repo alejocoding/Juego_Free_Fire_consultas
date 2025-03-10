@@ -58,6 +58,7 @@ if(isset($_GET['id_sala'])){
 
 
         <form class="ataques" method="post" id="ataque">
+            
 
             <div class="Container_armas">
                 <select name="Armas" id="eleccion">
@@ -71,6 +72,12 @@ if(isset($_GET['id_sala'])){
                 <div class="arma_sola" id ="arma_individual">
 
 
+                </div>
+
+                <div class="mi-vida-container">
+                    <h3>Tu Vida</h3>
+                    <progress id="mi-vida-barra" class="mi-vida-barra" max="100" value="100"></progress>
+                    <span id="mi-vida-texto">100%</span>
                 </div>
 
             </div>
@@ -107,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const id_sala = urlParams.get("id_sala"); 
 
     function actualizarJugadores() {
-        console.log("Esta es la sala",id_sala)
+        
         if (id_sala) {
             fetch("AJAX/mostrar_jugadores.php", { 
                 method: "POST", 
@@ -118,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(response => response.json()) 
             .then(data => {
-                console.log("Jugadores en la sala:", data);
+                
                 let usersDiv = document.getElementById("users");
                 usersDiv.innerHTML = ""; // Limpiar el div antes de mostrar los datos
 
@@ -138,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             </div>
                         </div>
                     `;
-                    console.log("Este es el enviado por php "+ user);
+                   
                     if(player.id_usuario == user){
 
                         button.style.display="none";
@@ -152,12 +159,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         const input_form = document.getElementById('replace');
                         input_form.value = player.id_usuario;
-                        console.log("este es el input", player);
-                        console.log("Clic en:", player.username);
+                     
                     });
 
                     usersDiv.appendChild(button);
-                    console.log("este es el array",player);
+                   
                 });
 
 
@@ -165,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if(data.length == 1 && !partida_finalizada){
                     partida_finalizada = true; // Marcar la partida como finalizada
                     setTimeout(() => {
-                        window.location.href="ajax/ganador.php?id_sala=" +id_sala;
+                        window.location.href="AJAX/ganador.php?id_sala=" +id_sala;
                     }, 1500);
                     
                 }
@@ -189,14 +195,28 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => response.json())
             .then(data => {
 
-                console.log("Respuesta de muerte.php:", data);
+                
                 if (data.status === "dead") {
                     jugadorMuerto = true;
                     window.location.href = "AJAX/perdedor.php?id_sala=" +id_sala; // Redirigir a mostrarle la alerta
 
                 } else {
-                    console.log(data.mensaje);
-                    console.log("Vida actual:", data.vida);
+                    
+                  
+                    let miVidaBarra = document.getElementById("mi-vida-barra");
+                    let miVidaTexto = document.getElementById("mi-vida-texto");
+
+                    miVidaBarra.value = data.vida;
+                    miVidaTexto.textContent = data.vida + "%";
+
+                    // Cambiar color de la barra según la vida restante
+                    if (data.vida > 50) {
+                        miVidaBarra.style.setProperty("--progress-color", "green");
+                    } else if (data.vida > 25) {
+                        miVidaBarra.style.setProperty("--progress-color", "orange");
+                    } else {
+                        miVidaBarra.style.setProperty("--progress-color", "red");
+                    }
                 }
             })
             .catch(error => console.error("Error al verificar la vida:", error));
@@ -220,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
     obtenerArma(document.getElementById('eleccion').value)
     
     function obtenerArma(id_arma){
-        console.log("se activa la funcion y ejecuto esto", id_arma)
+        
         fetch("AJAX/Arma_batalla.php?id_arma=" +id_arma)
         .then(response => response.json())
         .then(arma =>{
@@ -229,8 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("error con la consulta del arma", arma.error);
                 return;
             }
-            console.log("este es el arma", arma);
-            console.log("AAAAAAAAAAAAAAAAAAA Y EL ARMA?")
+           
             const Armadiv = document.getElementById('arma_individual');
             Armadiv.innerHTML = `
                                 <img src ="img/${arma.imagen}" class ="arma_Foto">
@@ -296,12 +315,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         let tiempoLimite = inicio + (5 * 60 * 1000); // 5 minutos en milisegundos
                         let contadorElemento = document.getElementById("contador");
 
-                        console.log("fecha inicio " + data.fecha_inicio +"variable"+inicio+ "este es el tiempo limite" +tiempoLimite)
+                       
                         function actualizarContador() {
                             let ahora = new Date().getTime();
                             let tiempoRestante = tiempoLimite - ahora;
                             
-                            console.log("Tiempo restante:", tiempoRestante);
+                           
 
                             if (tiempoRestante <= 0) {
                                 clearInterval(intervaloContador);
@@ -327,13 +346,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setInterval(() => {
                determinarGanador();
-            }, 300000); // Repetir cada 5 minutos segundos
+            }, 299000); // Repetir cada 5 minutos segundos
 
 
 
         function determinarGanador() {
             if (partida_finalizada) return;
-            console.log("se activo la funcion ganadoooor");
+            
                 fetch("AJAX/saber_ganador.php?id_sala=" + id_sala)
                     .then(response => response.json())
                     .then(data => {
@@ -344,14 +363,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             if (id_usuario_sesion == data.id_ganador) {
 
                                 setTimeout(() => {
-                                    window.location.href="ajax/ganador.php?id_sala=" +id_sala;
+                                    window.location.href="AJAX/ganador.php?id_sala=" +id_sala;
                                 }, 3000);
 
                             } else {
-                                window.location.href = "ajax/perdedor.php?id_sala=" + id_sala;
+                                window.location.href = "AJAX/perdedor.php?id_sala=" + id_sala;
                             }
                         } else {
-                            console.error("Error al determinar el ganador:", data);
+                           
                             alert("No se pudo determinar un ganador.");
                         }
                     })

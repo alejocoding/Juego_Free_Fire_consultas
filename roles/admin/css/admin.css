@@ -115,20 +115,8 @@ select {
     background: #f9f9f9;
 }
 
-/* Mejora la búsqueda */
-.barra_busqueda {
-    display: flex;
-    justify-content: start;
-    margin: 10px 0;
-}
 
-.barra_busqueda input {
-    width: 250px;
-    padding: 6px;
-    border: 1px solid #ccc;
-}
-
-/* 🟢 Responsividad: Ajustes en pantallas menores a 1000px */
+/*  Responsividad: Ajustes en pantallas menores a 1000px */
 @media (max-width: 1000px) {
     .tabla {
         overflow-x: auto;

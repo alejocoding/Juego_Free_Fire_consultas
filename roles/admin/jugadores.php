@@ -1,14 +1,16 @@
 <?php
-
+session_start();
+require_once("../../includes/ValidarSesion.php");
 require_once("../../Database/database.php");
 $conexion = new database;
 $con = $conexion->conectar();
 
 
-$users = $con->prepare("SELECT * FROM usuario u
-INNER JOIN roles r USING (id_rol)
-INNER JOIN estado e USING (id_estado)
-INNER JOIN personajes p USING (id_personaje)
+$users = $con->prepare("SELECT u.*, r.rol, e.estado, p.nombre AS personaje 
+FROM usuario u
+LEFT JOIN roles r ON u.id_rol = r.id_rol
+LEFT JOIN estado e ON e.id_estado = u.id_estado
+LEFT JOIN personajes p ON u.id_personaje = p.id_personaje
 WHERE u.id_rol = 2;");
 $users->execute();
 
@@ -34,17 +36,12 @@ $users = $users->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="index.php"><i class="bi bi-house-door"></i>inicio</a></li>
             <li><a href="jugadores.php"><i class="bi bi-people"></i>Jugadores</a></li>
             <li><a href="registro_partidas.php"><i class="bi bi-file-text"></i>Registro partidas</a></li>
-            <li><a href=""><i class="bi bi-gear"></i>Modificar Usuarios</a></li>
             <li><a href="../../includes/Sesion_destroy.php"><i class="bi bi-box-arrow-left"></i>Cerrar Sesion</a></li>
         </ul>
     </div>
 
     <div class="content">
         <h1>Seccion Usuarios</h1>
-        
-        <div class="barra_busqueda">
-            <input type="text" placeholder="Buscar Usuario por username">
-        </div>
 
         <form id="formUsuarios">
     <table>
@@ -62,17 +59,18 @@ $users = $users->fetchAll(PDO::FETCH_ASSOC);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user) { ?>
+            <?php foreach ($users as $user) {
+                 ?>
                 <tr data-id="<?= $user['id_usuario'] ?>">
                     <td><?= $user['id_usuario'] ?></td>
                     <td><?= $user['username'] ?></td>
                     <td><input type="text" class="correo" value="<?= $user['correo'] ?>"></td>
-                    <td><input type="text" class="vida" value="<?= $user['vida'] ?>"></td>
-                    <td><input type="text" class="nivel" value="<?= $user['nivel'] ?>"></td>
-                    <td><input type="text" class="puntos" value="<?= $user['puntos'] ?>"></td>
+                    <td><input type="text" class="vida" value="<?= $user['vida'] ?>" placeholder="vacio"></td>
+                    <td><input type="text" class="nivel" value="<?= $user['nivel'] ?>" placeholder="vacio"></td>
+                    <td><input type="text" class="puntos" value="<?= $user['puntos'] ?? 0 ?>" placeholder="vacio"></td>
                     <td>
                         <select class="rol">
-                            <option value="<?= $user['id_rol'] ?>" selected><?= $user['rol'] ?></option>
+                            <option value="<?= $user['id_rol'] ?>" selected><?= $user['rol'] ? : "Vacio"?></option>
                             <?php foreach ($con->query("SELECT * FROM roles WHERE id_rol != $user[id_rol]") as $rol) { ?>
                                 <option value="<?= $rol['id_rol'] ?>"><?= $rol['rol'] ?></option>
                             <?php } ?>
@@ -80,16 +78,16 @@ $users = $users->fetchAll(PDO::FETCH_ASSOC);
                     </td>
                     <td>
                         <select class="personaje">
-                            <option value="<?= $user['id_personaje'] ?>" selected><?= $user['nombre'] ?></option>
-                            <?php foreach ($con->query("SELECT * FROM personajes WHERE id_personaje != $user[id_personaje]") as $personaje) { ?>
-                                <option value="<?= $personaje['id_personaje'] ?>"><?= $personaje['nombre'] ?></option>
+                            <option value="<?= $user['id_personaje'] ?? 0 ?>" selected ><?= $user['personaje'] ? : "VACIO"  ?></option>
+                            <?php  foreach ($con->query("SELECT * FROM personajes") as $personaje) { ?>
+                                <option value="<?= $personaje['id_personaje']  ?>"><?= $personaje['nombre'] ?></option>
                             <?php } ?>
                         </select>
                     </td>
                     <td>
                         <select class="estado">
                             <option value="<?= $user['id_estado'] ?>" selected><?= $user['estado'] ?></option>
-                            <?php foreach ($con->query("SELECT * FROM estado WHERE id_estado < 3 AND id_estado != $user[id_estado]") as $estado) { ?>
+                            <?php  foreach ($con->query("SELECT * FROM estado WHERE id_estado < 3 AND id_estado != $user[id_estado]") as $estado) { ?>
                                 <option value="<?= $estado['id_estado'] ?>"><?= $estado['estado'] ?></option>
                             <?php } ?>
                         </select>
@@ -132,8 +130,10 @@ $users = $users->fetchAll(PDO::FETCH_ASSOC);
         });
     });
 
+   
+
     try {
-        const response = await fetch("fetch/actualizar_usuarios.php", {
+        const response = await fetch("FETCH/actualizar_usuarios.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

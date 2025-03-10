@@ -15,7 +15,7 @@ if(isset($_POST['id_sala'])){
    
     if($cantidad >= 0 && $cantidad <5 ){
         
-        $update = $con->prepare("UPDATE SALAS SET cantidad_jugadores = cantidad_jugadores + 1 WHERE id_sala = :sala ");
+        $update = $con->prepare("UPDATE salas SET cantidad_jugadores = cantidad_jugadores + 1 WHERE id_sala = :sala ");
         $update->bindParam(":sala",$_POST['id_sala'], PDO::PARAM_INT);
         $update->execute();
 
