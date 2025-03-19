@@ -23,7 +23,7 @@
 
                         // EN CASO DE ERROR BORRAR TODA ESTA SECCION
 
-                        if($consulta['id_estado'] == 1){
+                        if($consulta['id_estado'] == 1 && $consulta['id_rol'] != 1){
 
                              $bloqueo_dias = $con->prepare("SELECT DATEDIFF(NOW(), fecha_entrada) AS dias_diferencia 
                              FROM registro_ingreso 

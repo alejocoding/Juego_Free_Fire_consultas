@@ -95,6 +95,8 @@ if(isset($_GET['id_sala'])){
 
             <input type="submit" class="boton" value="ATACAR" name ="enviar" id ="send">
         </form>
+
+        <div id="atacarShow"></div>
         
        
 
@@ -296,9 +298,29 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.text()) // ⬅️ Cambiado de .json() a .text()
+            .then(response => response.json()) 
             .then(data => {
                 console.log("Respuesta del servidor:", data);
+
+                if (data.status === "success") {
+                    atacarShow.innerHTML = `<p  class ="bounce" style="color: white;">${data.mensaje} ${data.mensaje_extra}</p>`; // Mostrar mensaje del servidor
+
+                    if(data.mensaje_extra == "KILL"){
+
+                        const input = document.getElementById('nombre');
+                        input.value = "";
+
+                        const input_form = document.getElementById('replace');
+                        input_form.value = "";
+                    }
+                } else {
+                    atacarShow.innerHTML = `<p  class ="bounce" style="color: red;">Nadie atacado</p>`;
+                }
+
+                atacarShow.classList.remove("bounce");
+                void atacarShow.offsetWidth; // Forzar el reflow para reiniciar la animación
+                atacarShow.classList.add("bounce");
+
                 
             })
             .catch(error => console.error("Error en el envío:", error));

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mensaje_extra = "No se realizó ningún ataque."; // Asegurar valor por defecto
 
     if ($arma_id && $atacado) {  
-            
+
         // Obtener el daño del arma
         $daño_arma = $con->prepare("SELECT puntos_daño FROM categoria 
                                     INNER JOIN armas ON armas.id_categoria = categoria.id_categoria 
@@ -30,6 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mensaje_extra = "Golpe normal.";
         }
 
+        // Obtener nombres de usuario
+        $stmt = $con->prepare("SELECT username FROM usuario WHERE id_usuario = :id");
+        $stmt->bindParam(":id", $usuario, PDO::PARAM_INT);
+        $stmt->execute();
+        $nombre_usuario = $stmt->fetchColumn();
+
+        $stmt = $con->prepare("SELECT username, vida FROM usuario WHERE id_usuario = :id");
+        $stmt->bindParam(":id", $atacado, PDO::PARAM_INT);
+        $stmt->execute();
+        $victima = $stmt->fetch(PDO::FETCH_ASSOC);
+
         // Registrar el ataque
         $ataque = $con->prepare("INSERT INTO daño_batalla (id_usuario, id_atacado, id_arma, dano_causado) 
                                  VALUES (:user, :atacado, :arma, :dano)");
@@ -39,26 +50,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ataque->bindParam(":dano", $daño, PDO::PARAM_INT);
         $ataque->execute(); 
 
-        // Reducir la vida del jugador atacado
-        $consultaVida = $con->prepare("SELECT vida FROM usuario WHERE id_usuario = :atacado");
-        $consultaVida->bindParam(":atacado", $atacado, PDO::PARAM_INT);
-        $consultaVida->execute();
-        $vida = $consultaVida->fetchColumn();
-
-        if ($vida - $daño < 0) {
+        // Evaluar si la víctima muere
+        if ($victima['vida'] - $daño <= 0) {
             // El jugador muere → Atacante gana 100 puntos
             $muerte = $con->prepare("UPDATE usuario SET puntos = puntos + 100 WHERE id_usuario = :id_user");
             $muerte->bindParam(":id_user", $usuario, PDO::PARAM_INT);
             $muerte->execute();
 
-            
-
-            // Si se muere pailas
+            // Poner vida en 0
             $stmt = $con->prepare("UPDATE usuario SET vida = 0 WHERE id_usuario = :atacado");
             $stmt->bindParam(":atacado", $atacado, PDO::PARAM_INT);
             $stmt->execute();
 
-            $respuesta = ["status" => "success", "mensaje" => "USUARIO ELIMINADO +100 PUNTOS"];
+            $mensaje = " 💀 " . $victima['username'] . " ha sido eliminado.";
+            $mensaje_extra = "KILL";
+            $respuesta = ["status" => "success", "mensaje" => $mensaje,  "mensaje_extra" => $mensaje_extra];
         } else {
             // Actualizar vida y puntos del atacado
             $bajar = $con->prepare("UPDATE usuario SET vida = vida - :dano1, 
@@ -75,7 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $subir_user->bindParam(":dano", $daño, PDO::PARAM_INT);
             $subir_user->execute();
 
-            $respuesta = ["status" => "success", "mensaje" => "Ataque registrado con éxito"];
+            $mensaje = "¡" . $nombre_usuario . " atacó a " . $victima['username'] . " con " . $daño . " de daño!";
+            $respuesta = ["status" => "success", "mensaje" => $mensaje, "mensaje_extra" => $mensaje_extra];
         }
     } else {
         $respuesta = ["status" => "error", "mensaje" => "Faltan datos", "detalle" => $mensaje_extra];

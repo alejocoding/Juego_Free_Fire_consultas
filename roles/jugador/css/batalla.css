@@ -138,3 +138,18 @@ body {
         padding: 14px;
     }
 }
+
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.bounce {
+    display: inline-block;
+    animation: bounce 0.5s ease;
+}
