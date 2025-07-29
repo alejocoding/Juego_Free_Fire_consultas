@@ -129,6 +129,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 
                 let usersDiv = document.getElementById("users");
+                let player_vivo = false;
+                const input_form = document.getElementById('replace')
+                const input = document.getElementById('nombre');
+
                 usersDiv.innerHTML = ""; // Limpiar el div antes de mostrar los datos
 
                 
@@ -156,17 +160,29 @@ document.addEventListener("DOMContentLoaded", function () {
                     button.id='prueba';
 
                     button.addEventListener("click", function() {
-                        const input = document.getElementById('nombre');
+                        
                         input.value = player.username;
 
-                        const input_form = document.getElementById('replace');
+                     
                         input_form.value = player.id_usuario;
                      
                     });
 
                     usersDiv.appendChild(button);
+
+                    if (input_form.value == player.id_usuario) {
+                        player_vivo = true;
+                    }
                    
                 });
+
+                // Si el jugador seleccionado ya no está en la lista, vaciar input y placeholder
+                if (!player_vivo) {
+                    
+                    input.value = "";
+                    input_form.value = "";
+                    input.placeholder = "";
+                  }
 
 
 
@@ -402,8 +418,6 @@ document.addEventListener("DOMContentLoaded", function () {
     iniciarContador();
 
 });
-
-
 
 
 

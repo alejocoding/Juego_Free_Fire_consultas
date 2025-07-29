@@ -121,7 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Si hay 4 jugadores en la sala, esperar 10 segundos antes de redirigir
                 const alert = document.getElementById('empezando');
                 if (data.length === 3) {
-
                     
                     alert.style.display="flex";
                     

@@ -61,7 +61,7 @@ unset($_SESSION['code']);
                         <p class="forgot_password">Olvidaste tu contraseña?<a href="recuperar_contraseña_1.php" style="color: #5e17eb;">Recuperala</a></p> 
                         
                         <div class = "btn-field">
-                            <button type="submit" name = "submit" id="log" value = "Log" class="btn btn-primary" onclick="window.location.href='roles/jugador/index.php'">Sig  in</button>
+                            <button type="submit" name = "submit" id="log" value = "Log" class="btn btn-primary"    >Sig  in</button>
                         </div>
                     </form>
                     <button onclick="window.location.href='registro.php'" class="buton_registro"> ¿Nuevo en FREE FIRE? <p style="color: #f96800">Registrate aqui</p></button>
