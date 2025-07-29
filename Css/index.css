@@ -1,0 +1,349 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    transition: 2s ease-in-out;
+   
+}
+
+body{
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+   
+}
+.gif{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 800px;
+    margin-top: 100px;
+
+   
+}
+.gif img{
+    width: 100%;
+    position: absolute;
+    object-fit: cover;
+    height: 800px;
+    z-index: 0;
+}
+
+.gif img:first-child{
+    z-index: 1;
+    height: 211px;
+    max-width: 50%;
+    width: auto;
+    
+    object-fit: cover;
+    margin-top: 60px;
+}
+
+.jugar{
+    z-index: 1;
+    font-size: 22px;
+    width: 280px;
+    height: 68px;
+    background-color: #f80000;
+    border-radius: 0;
+    color: white;
+    border-color: black;
+    border: 3px solid white;
+    margin-top: 350px;
+}
+
+
+/* ESTA ES LA PARTE DEL AVISO FLOTANTEEE */
+
+.aviso{
+    position: fixed;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(11, 0, 0, 0.92);
+    width: 600px;
+    height: 250px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    color: white;
+    overflow-y: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cerrar_aviso{
+    align-self: flex-end;
+    color: 0;
+    background-color: transparent;
+    color: white;
+    font-size: 60px;
+    border: 0;
+}
+
+.botones{
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+.registro{
+    width: 161px;
+    height: 51px;
+    border-radius: 6px;
+    background-color: #ef1c10;
+    color: white;
+}
+.inicio{
+    width: 161px;
+    height: 51px;
+    border-radius: 6px;
+    background-color: #5b3030;
+    color: white;
+}
+
+@media (max-width:400px){
+    .aviso{
+        width: 300px;
+    }
+    .aviso h1{
+        font-size: 25px;
+    }
+    .registro,.inicio{
+        width: 120px;
+    }
+    .red_card {
+        width: 280px;
+    }
+    
+}
+/* APARTADO DE LOS PERSONAJES */
+
+.personajes{
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: stretch;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    background-color: #0b0000;
+}
+
+.personajes>*{
+   
+    color: white;
+}
+
+.personajes_fotos{
+    align-self: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 160px;
+}
+.red_card{
+    display: block;
+    justify-items: center;
+    height: 415px;
+    background-color: rgba(248, 0, 0, 0.5);
+    width: 400px;
+    padding: 20px;
+}
+
+.red_card h1{
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.red_card p{
+    font-size: 18px;
+    width: 80%;
+}
+
+.Texto h1{
+    font-size: 34px;
+    padding: 50px;
+}
+
+
+
+.Texto p{
+    font-size: 25px;
+    margin-bottom: 80px;
+}
+
+
+.imagen_container{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+
+.imagen_container img{
+ width: 100%;
+ 
+ object-fit: cover;   
+}
+
+.info_spawn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Fondo negro con transparencia */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease-in-out;
+}
+.imagen_container:hover .info_spawn {
+    opacity: 1;
+}
+
+/* APARTADO DE LAS ARMAS */
+
+.armas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    padding-bottom: 100px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.armas_vista{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    height: auto;
+    padding: 15px;
+    gap: 15px;
+}
+
+.card_gun{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background-color: rgba(11, 0, 0, 0.42);
+    height: 90%;
+    width: 377px;
+    border-radius: 50px;
+}
+
+.card_gun img{
+    width: 350px;
+    height: auto;
+    object-fit: cover;
+}
+.chiquitas{
+    display: flex;
+    flex-direction: column;
+    gap: 6%;
+}
+.cardSmall{
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    background-color: rgba(11, 0, 0, 0.42);
+    width: 250px;
+    height: auto;    
+    border-radius: 35px;
+    margin-bottom: 15px;
+   
+}
+.cardSmall img{
+    width: 62%;
+    object-fit:cover;
+}
+
+.card_gun:hover .info_spawn,.cardSmall:hover .info_spawn {
+    opacity: 1;
+}
+
+/* A PARTIR DE AQUI EL PIE DE PAGINA */
+
+
+.footer{
+   position: absolute;
+   bottom: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 20px 0 20px;
+    background-color: #0b0000;
+    color: white;
+    text-align: center;
+   
+    align-items: center;
+}
+
+.footer img{
+    width: 100px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width:1500px) {
+
+    .red_card{
+        width: 250px;
+    }
+    .imagen_container img {
+        height: 372px;
+    }
+      
+    
+}
+
+@media (max-width:1184px){
+
+    .card_gun{
+        width: 310px
+    }
+    .card_gun img{
+        width:300px;
+    }
+
+    .cardSmall img{
+        width: 56%;
+    }
+    .red_card{
+        width: 214px;
+    }
+    .gif img:first-child{
+        object-fit: contain;
+    }
+}
+
+@media  (max-width:750px){
+
+   
+    .gif img:first-child{
+       
+        max-width: 86%;
+    }
+    .info_spawn{
+        font-size: 14px;
+    }
+}
